@@ -32,9 +32,17 @@ if __name__ == '__main__':
         .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites.csv') \
         .toDF('Domain', 'Location on Site', 'Tech Spend USD', 'Sales Revenue USD', 'Social', 'Employees', 'Company', 'Vertical', 'Tranco', 'Page Rank', 'Majestic', 'Umbrella', 'Telephones', 'Emails', 'Twitter', 'Facebook', 'LinkedIn', 'Google', 'Pinterest', 'GitHub', 'Instagram', 'Vk', 'Vimeo', 'Youtube', 'TikTok', 'People', 'City', 'State', 'Zip', 'Country', 'First Detected', 'Last Found', 'First Indexed', 'Last Indexed', 'Exclusion', 'Compliance')
 
-    company_df\
-        .orderBy(desc('Page Rank'))\
-        .show()
+    print('Breaking the File into Smaller files')
+
+    company_df \
+        .orderBy(desc('Page Rank')) \
+        .coalesce(100) \
+        .write \
+        .partitionBy('Page Rank') \
+        .mode('append') \
+        .option('header', 'true') \
+        .option('delimiter', ',') \
+        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites.csv/data')
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
