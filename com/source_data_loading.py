@@ -33,5 +33,5 @@ if __name__ == '__main__':
         .toDF()
 
 
-# spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" ad-data/com/pg/source_data_loading.py
+# spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/source_data_loading.py
 
