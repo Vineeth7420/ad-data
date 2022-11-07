@@ -35,16 +35,18 @@ if __name__ == '__main__':
     print('Breaking the File into Smaller files')
 
     pr_df = company_df\
-        .orderBy(desc('Page Rank'))\
-        .count()
+        .rdd.getNumPartitions()
+    
+    print('# no of partitions are/is ' + str(pr_df.rdd.getNumPartitions()))
 
-    pr_df \
-        .repartition(100) \
-        .write \
-        .mode('append') \
-        .option('header', 'true') \
-        .option('delimiter', ',') \
-        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites/data')
+
+    # pr_df \
+    #     .repartition(100) \
+    #     .write \
+    #     .mode('append') \
+    #     .option('header', 'true') \
+    #     .option('delimiter', ',') \
+    #     .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites/data')
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
