@@ -36,8 +36,8 @@ if __name__ == '__main__':
 
     pr_df = company_df\
         .rdd.getNumPartitions()
-    
-    print('# no of partitions are/is ' + str(pr_df.rdd.getNumPartitions()))
+
+    print('# no of partitions are/is ' + str(pr_df))
 
 
     # pr_df \
