@@ -42,7 +42,7 @@ if __name__ == '__main__':
         .mode('append') \
         .option('header', 'true') \
         .option('delimiter', ',') \
-        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites.csv/data')
+        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites/data')
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
