@@ -36,9 +36,8 @@ if __name__ == '__main__':
 
     company_df \
         .orderBy(desc('Page Rank')) \
-        .coalesce(100) \
+        .repartion(100) \
         .write \
-        .partitionBy('Page Rank') \
         .mode('append') \
         .option('header', 'true') \
         .option('delimiter', ',') \
