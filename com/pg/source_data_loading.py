@@ -24,14 +24,15 @@ if __name__ == '__main__':
     hadoop_conf.set('f3.s3a.access.key', app_secret['s3_conf']['access_key'])
     hadoop_conf.set('f3.s3a.secret.key', app_secret['s3_conf']['secret_access_key'])
 
-    finance_df = spark.read \
+    company_df = spark.read \
         .option('header', 'true') \
         .option('mode', 'DROPMALFORMED') \
         .option('delimiter', ',') \
         .option('inferSchema', 'true') \
         .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites.csv') \
-        .toDF()
+        .toDF('Domain', 'Location on Site', 'Tech Spend USD', 'Sales Revenue USD', 'Social', 'Employees', 'Company', 'Vertical', 'Tranco', 'Page Rank', 'Majestic', 'Umbrella', 'Telephones', 'Emails', 'Twitter', 'Facebook', 'LinkedIn', 'Google', 'Pinterest', 'GitHub', 'Instagram', 'Vk', 'Vimeo', 'Youtube', 'TikTok', 'People', 'City', 'State', 'Zip', 'Country', 'First Detected', 'Last Found', 'First Indexed', 'Last Indexed', 'Exclusion', 'Compliance')
 
+    print(company_df.take(50))
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
