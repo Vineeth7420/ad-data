@@ -34,9 +34,12 @@ if __name__ == '__main__':
 
     print('Breaking the File into Smaller files')
 
-    company_df \
-        .orderBy(desc('Page Rank')) \
-        .repartion(100) \
+    pr_df = company_df\
+        .orderBy(desc('Page Rank'))\
+        .count()
+
+    pr_df \
+        .repartition(100) \
         .write \
         .mode('append') \
         .option('header', 'true') \
