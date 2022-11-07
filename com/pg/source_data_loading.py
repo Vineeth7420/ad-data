@@ -40,11 +40,10 @@ if __name__ == '__main__':
     pr_df \
         .repartition(100) \
         .write \
-        .partitionBy('Vertical') \
         .mode('append') \
         .option('header', 'true') \
         .option('delimiter', ',') \
-        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/data')
+        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/adsdata')
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
