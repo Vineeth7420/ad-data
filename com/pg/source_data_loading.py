@@ -33,8 +33,7 @@ if __name__ == '__main__':
         .toDF('Domain', 'Location on Site', 'Tech Spend USD', 'Sales Revenue USD', 'Social', 'Employees', 'Company', 'Vertical', 'Tranco', 'Page Rank', 'Majestic', 'Umbrella', 'Telephones', 'Emails', 'Twitter', 'Facebook', 'LinkedIn', 'Google', 'Pinterest', 'GitHub', 'Instagram', 'Vk', 'Vimeo', 'Youtube', 'TikTok', 'People', 'City', 'State', 'Zip', 'Country', 'First Detected', 'Last Found', 'First Indexed', 'Last Indexed', 'Exclusion', 'Compliance')
 
     company_df\
-        .orderBy('Page Rank')\
-        .asc()\
+        .orderBy(asc('Page Rank'))\
         .show()
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
