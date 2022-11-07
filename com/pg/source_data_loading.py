@@ -35,7 +35,9 @@ if __name__ == '__main__':
     print('Breaking the File into Smaller files')
 
     pr_df = company_df\
-        .rdd.getNumPartitions()
+        .orderBy(desc('Page Rank'))
+
+    pr_df.show()
 
     print('# no of partitions are/is ' + str(pr_df))
 
