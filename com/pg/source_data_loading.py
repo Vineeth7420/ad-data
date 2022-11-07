@@ -37,18 +37,14 @@ if __name__ == '__main__':
     pr_df = company_df\
         .orderBy(desc('Page Rank'))
 
-    pr_df.show()
-
-    print('# no of partitions are/is ' + str(pr_df))
-
-
-    # pr_df \
-    #     .repartition(100) \
-    #     .write \
-    #     .mode('append') \
-    #     .option('header', 'true') \
-    #     .option('delimiter', ',') \
-    #     .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/All-Live-Shopify-Sites/data')
+    pr_df \
+        .repartition(100) \
+        .write \
+        .partitionBy('Vertical') \
+        .mode('append') \
+        .option('header', 'true') \
+        .option('delimiter', ',') \
+        .csv('s3a://' + app_conf['s3_conf']['s3_bucket'] + '/data')
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" com/pg/source_data_loading.py
 
